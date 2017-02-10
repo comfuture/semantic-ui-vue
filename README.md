@@ -19,5 +19,5 @@ npm run dev
 npm run build
 
 # build documentations
-rpm run build:docs
+npm run build:docs
 ```
