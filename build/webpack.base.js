@@ -12,6 +12,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        loader: 'css-loader'
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -29,6 +33,14 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
+        }
+      },
+      {
+        test: /\.(woff2?|ttf|eot|svg|otf)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]?[hash]',
+          publicPath: '/'
         }
       }
     ]
