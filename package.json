@@ -25,6 +25,7 @@
     "html-webpack-plugin": "^2.28.0",
     "semantic-ui-css": "^2.2.4",
     "vue-loader": "^10.0.0",
+    "vue-router": "^2.2.0",
     "vue-template-compiler": "^2.1.0",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0",
