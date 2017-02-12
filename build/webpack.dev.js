@@ -8,7 +8,6 @@ module.exports = {
   },
   output: {
     path: '/',
-    publicPath: 'index.html',
     filename: '[name].js'
   },
   module: {
