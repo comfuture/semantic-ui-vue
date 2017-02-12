@@ -1,9 +1,7 @@
-import UiButton from './uiButton'
-import UiContainer from './uiContainer'
+import Button from './button'
 
 export default {
   install(Vue) {
-    Vue.use(UiButton)
-    Vue.use(UiContainer)
+    Vue.use(Button)
   }
 }
