@@ -1,9 +1,7 @@
-import Button from './definitions/elements/button'
-// ...
+import Elements from './components/elements'
 
 export default {
   install(Vue) {
-    Vue.use(Button)
-    //...
+    Vue.use(Elements)
   }
 }

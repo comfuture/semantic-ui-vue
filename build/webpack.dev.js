@@ -15,6 +15,12 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
@@ -32,7 +38,8 @@ module.exports = merge(baseConfig, {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      'elements': path.resolve(__dirname, '../src/components/elements')
     }
   },
   plugins: [
