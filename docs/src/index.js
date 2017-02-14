@@ -11,7 +11,6 @@ Vue.use(VueRouter)
 Vue.component('docs-sidebar', Sidebar)
 Vue.component('docs-page', Page)
 
-
 const router = new VueRouter({routes})
 
 const app = new Vue({
