@@ -1,7 +1,7 @@
 import Introduction from './pages/Introduction.vue'
 
 function lazyLoad(component) {
-  return (resolve)=> require([`./pages/${component}.vue`], resolve)
+  return (resolve) => require([`./pages/${component}.vue`], resolve)
 }
 
 const Button = lazyLoad('elements/Button')
