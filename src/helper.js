@@ -15,3 +15,10 @@ export function addClass(el, classes) {
     el.className = unique(classList).join(' ')
   }
 }
+
+export function dict(pairs) {
+  return pairs.reduce((a, b) => {
+    a[b[0]] = b[1]
+    return a
+  }, {})
+}
