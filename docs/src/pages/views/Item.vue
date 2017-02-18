@@ -9,11 +9,15 @@
         <ui-item image="http://semantic-ui.com/images/avatar/large/stevie.jpg">
           <ui-content header="Image and header">
             <p slot="description">description</p>
+            <div slot="meta">
+              <span class="price">$ 5.5</span>
+              <span class="discount">20% DC</span>
+            </div>
           </ui-content>
         </ui-item>
         <ui-item>
           <ui-content header="Test">
-            <p slot="description">description</p>
+            <router-link to="/" slot="description">description</router-link>
           </ui-content>
         </ui-item>
         <ui-item>
