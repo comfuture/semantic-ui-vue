@@ -1,27 +1,14 @@
 <template lang="html">
-  <div class="ui items" :class="className">
+  <div class="ui items" :class="[propClass]">
     <slot></slot>
   </div>
 </template>
 
 <script>
+import {PropClass} from 'semantic/mixins'
+
 export default {
   name: 'ui-items',
-  props: {
-    divided: Boolean,
-    very: Boolean,
-    relaxed: Boolean,
-    link: Boolean
-  },
-  computed: {
-    className() {
-      return {
-        divided: this.divided,
-        very: this.very,
-        relaxed: this.relaxed,
-        link: this.link
-      }
-    }
-  }
+  mixins: [PropClass('divided', 'very', 'relaxed', 'link')]
 }
 </script>
