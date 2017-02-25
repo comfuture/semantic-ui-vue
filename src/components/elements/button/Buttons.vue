@@ -7,10 +7,6 @@
 <script>
 import {PropClass} from 'semantic/mixins'
 
-const NUMERICS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
-const COLORS = []
-const SIZES = ['mini', 'tiny', 'small', 'medium', 'large', 'big', 'huge', 'massive']
-
 export default {
   name: 'ui-buttons',
   mixins: [PropClass('icon', 'vertical', 'labeled', 'basic')],
