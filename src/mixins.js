@@ -25,20 +25,19 @@ export function SlotClass(mapping) {
 * define boolean property and make that as className
 */
 export function PropClass(...props) {
-  let propDict = {}
+  let properties = {}
   for (let prop of props) {
-    propDict[prop] = Boolean
+    properties[prop] = Boolean
   }
 
   return {
-    props: propDict,
+    props: properties,
     computed: {
       propClass() {
         let ret = {}
         for (let prop of props) {
-          ret[prop] = this.hasOwnProperty(prop) && !!this[prop]
+          ret[prop] = properties.hasOwnProperty(prop) && !!this[prop]
         }
-        console.log(ret)
         return ret
       }
     }
