@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PropClass from 'semantic/mixins'
+import {PropClass} from 'semantic/mixins'
 
 export default {
   name: 'ui-container',
@@ -17,10 +17,10 @@ export default {
     stylingClass() {
       let cx = []
       if (this.align) {
-        if (/left|right|center/.test(this.align)) {
+        if (/^(left|right|center)$/.test(this.align)) {
           cx.push(`${this.align} aligned`)
         } else if (this.align === 'justified') {
-          cs.push(this.align)
+          cx.push(this.align)
         }
       }
     }
