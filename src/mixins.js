@@ -10,11 +10,11 @@ export function SlotClass(mapping) {
       for (let key of Object.keys(mapping)) {
         value = mapping[key]
         if (this.$slots.hasOwnProperty(key)) {
-          try {
             for (let slot of this.$slots[key]) {
-              addClass(slot.elm, value)
+              try {
+                addClass(slot.elm, value)
+              } catch (e) {}
             }
-          } catch (e) {}
         }
       }
     }
