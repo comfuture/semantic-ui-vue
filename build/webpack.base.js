@@ -18,18 +18,18 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
+        loader: 'eslint',
         include: [resolve('src'), resolve('test')],
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'babel',
         exclude: /node_modules/
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: 'url',
         query: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[ext]?[hash:7]')
@@ -37,7 +37,7 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: 'url',
         query: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[ext]?[hash:7]')
@@ -48,8 +48,10 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      'semantic': path.resolve(__dirname, '../src'),
-      'elements': path.resolve(__dirname, '../src/components/elements')
+      'semantic': path.resolve(__dirname, '../src')
     }
+  },
+  resolveLoader: {
+    moduleExtensions: ['-loader']
   }
 }

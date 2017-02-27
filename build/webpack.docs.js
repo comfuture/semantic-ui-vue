@@ -19,18 +19,18 @@ module.exports = merge(baseConfig, {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'vue-style-loader',
-          use: 'css-loader'
+          fallback: 'vue-style',
+          use: 'css'
         })
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'vue',
         options: {
           loaders: {
             css: ExtractTextPlugin.extract({
-              fallback: 'vue-style-loader',
-              use: 'css-loader'
+              fallback: 'vue-style',
+              use: 'css'
             })
           }
         }
