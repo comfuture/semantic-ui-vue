@@ -33,6 +33,7 @@
     "html-webpack-plugin": "^2.28.0",
     "remove": "^0.1.5",
     "semantic-ui-css": "^2.2.4",
+    "url-loader": "^0.5.8",
     "vue-loader": "^10.0.0",
     "vue-router": "^2.2.0",
     "vue-template-compiler": "^2.1.0",

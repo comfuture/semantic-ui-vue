@@ -1,14 +1,17 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var utils = require('./utils')
+var config = require('./config')
+
+function resolve (dir) {
+  return path.resolve(__dirname, '..', dir)
+}
 
 module.exports = {
-  entry: {
-    lib: './src/index.js'
-  },
   output: {
-    path: './dist/',
-    filename: '[name].js'
+    path: config.build.assetsRoot,
+    filename: '[name].js',
+    publicPath: config.build.assetsPublicPath
   },
   module: {
     rules: [
@@ -16,31 +19,29 @@ module.exports = {
         enforce: 'pre',
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
+        include: [resolve('src'), resolve('test')],
         exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'vue-style-loader',
-          use: 'css-loader'
-        })
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            css: ExtractTextPlugin.extract({
-              fallback: 'vue-style-loader',
-              use: 'css-loader'
-            })
-          }
-        }
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[ext]?[hash:7]')
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[ext]?[hash:7]')
+        }
       }
     ]
   },

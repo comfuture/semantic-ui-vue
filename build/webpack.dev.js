@@ -9,39 +9,17 @@ module.exports = merge(baseConfig, {
   entry: {
     dev: './docs/src/index.js'
   },
-  output: {
-    path: '/tmp',
-    filename: '[name].js'
-  },
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      },
-      {
-        test: /\.(woff2?|ttf|eot|svg|otf)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        test: /\.vue$/,
+        loader: 'vue-loader'
       }
     ]
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.common.js',
-      'elements': path.resolve(__dirname, '../src/components/elements')
-    }
   },
   plugins: [
     new ExtractTextPlugin('[name].css'),

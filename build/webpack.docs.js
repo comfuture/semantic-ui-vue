@@ -1,33 +1,38 @@
 var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
+// var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var baseConfig = require('./webpack.base')
+var utils = require('./utils')
 
 module.exports = merge(baseConfig, {
   entry: {
     docs: './docs/src/index.js'
   },
   output: {
-    path: './dist/docs',
-    filename: 'assets/[name].[chunkhash:8].js'
+    filename: utils.assetsPath('js/[name].[chunkhash:8].js')
   },
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'assets/[name].[ext]?[hash]'
-        }
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'vue-style-loader',
+          use: 'css-loader'
+        })
       },
       {
-        test: /\.(woff2?|ttf|eot|svg|otf)$/,
-        loader: 'file-loader',
+        test: /\.vue$/,
+        loader: 'vue-loader',
         options: {
-          name: 'assets/[name].[ext]?[hash]'
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              fallback: 'vue-style-loader',
+              use: 'css-loader'
+            })
+          }
         }
       }
     ]
@@ -38,14 +43,14 @@ module.exports = merge(baseConfig, {
         NODE_ENV: '"production"'
       }
     }),
-    new CopyWebpackPlugin([
-      {
-        context: './docs/assets',
-        from: '**/*',
-        to: './dist/docs/assets'
-      }
-    ]),
-    new ExtractTextPlugin('assets/[name].[chunkhash:8].css'),
+    // new CopyWebpackPlugin([
+    //   {
+    //     context: './docs/assets',
+    //     from: '**/*',
+    //     to: './dist/docs/assets'
+    //   }
+    // ]),
+    new ExtractTextPlugin(utils.assetsPath('css/[name].[chunkhash:8].css')),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './docs/index.html',
