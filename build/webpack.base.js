@@ -39,6 +39,7 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
+      'semantic': path.resolve(__dirname, '../src'),
       'elements': path.resolve(__dirname, '../src/components/elements')
     }
   }
