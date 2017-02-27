@@ -1,4 +1,4 @@
-var path = require('path')
+// var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 // var CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -8,12 +8,6 @@ var baseConfig = require('./webpack.base')
 var utils = require('./utils')
 
 module.exports = merge(baseConfig, {
-  entry: {
-    docs: './docs/src/index.js'
-  },
-  output: {
-    filename: utils.assetsPath('js/[name].[chunkhash:8].js')
-  },
   module: {
     rules: [
       {

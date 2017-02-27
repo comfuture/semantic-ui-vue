@@ -1,5 +1,4 @@
 var path = require('path')
-var webpack = require('webpack')
 var utils = require('./utils')
 var config = require('./config')
 
@@ -8,9 +7,12 @@ function resolve (dir) {
 }
 
 module.exports = {
+  entry: {
+    docs: './docs/src/index.js'
+  },
   output: {
     path: config.build.assetsRoot,
-    filename: '[name].js',
+    filename: utils.assetsPath('js/[name].[chunkhash:7].js'),
     publicPath: config.build.assetsPublicPath
   },
   module: {

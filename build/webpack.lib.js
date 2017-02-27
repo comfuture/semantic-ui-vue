@@ -8,8 +8,9 @@ module.exports = merge(baseConfig, {
     lib: './src/index.js'
   },
   output: {
-    path: './dist/',
-    filename: '[name].js'
+    path: path.resolve(__dirname, '../dist'),
+    filename: '[name].js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -37,3 +38,6 @@ module.exports = merge(baseConfig, {
   ],
   devtool: '#source-map'
 })
+
+// delete entry docs
+delete module.exports.entry.docs

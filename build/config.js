@@ -1,4 +1,3 @@
-// see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 
 module.exports = {
@@ -7,9 +6,6 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist/docs'),
     assetsSubDirectory: 'assets',
     assetsPublicPath: '/'
-  },
-  lib: {
-    root: path.resolve(__dirname, '../dist')
   },
   dev: {
     cssSourceMap: false

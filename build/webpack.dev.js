@@ -1,13 +1,13 @@
-var path = require('path')
-var webpack = require('webpack')
+// var path = require('path')
+// var webpack = require('webpack')
 var merge = require('webpack-merge')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var baseConfig = require('./webpack.base')
+var utils = require('./utils')
 
 module.exports = merge(baseConfig, {
-  entry: {
-    dev: './docs/src/index.js'
+  output: {
+    filename: utils.assetsPath('js/[name].[hash:7].js')
   },
   module: {
     rules: [
@@ -22,7 +22,6 @@ module.exports = merge(baseConfig, {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './docs/index.html',
