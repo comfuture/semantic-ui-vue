@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PropClass from 'semantic/mixins'
+import {PropClass} from 'semantic/mixins'
 
 export default {
   name: 'ui-divider',
