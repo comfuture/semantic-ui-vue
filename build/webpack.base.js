@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -19,13 +20,20 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: 'vue-style-loader',
+          use: 'css-loader'
+        })
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
           loaders: {
+            css: ExtractTextPlugin.extract({
+              fallback: 'vue-style-loader',
+              use: 'css-loader'
+            })
           }
         }
       },

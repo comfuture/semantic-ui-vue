@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var baseConfig = require('./webpack.base')
 
 module.exports = merge(baseConfig, {
@@ -44,6 +45,7 @@ module.exports = merge(baseConfig, {
         to: './dist/docs/assets'
       }
     ]),
+    new ExtractTextPlugin('assets/[name].[chunkhash:8].css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './docs/index.html',

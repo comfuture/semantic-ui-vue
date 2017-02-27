@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var baseConfig = require('./webpack.base')
 
 module.exports = merge(baseConfig, {
@@ -43,6 +44,7 @@ module.exports = merge(baseConfig, {
     }
   },
   plugins: [
+    new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './docs/index.html',
