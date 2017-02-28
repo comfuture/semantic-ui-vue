@@ -1,15 +1,15 @@
 <template lang="html">
-  <div class="content" :class="className">
+  <lazy-tag class="content" :class="className">
     <div class="header" v-if="!!header">{{header}}</div>
     <slot></slot>
     <slot name="meta"></slot>
     <slot name="description"></slot>
     <slot name="extra"></slot>
-  </div>
+  </lazy-tag>
 </template>
 
 <script>
-import {SlotClass} from 'semantic/mixins'
+import {SlotClass, LazyTag} from 'semantic/mixins'
 
 export default {
   name: 'ui-content',
@@ -18,7 +18,8 @@ export default {
       description: 'description',
       meta: 'meta',
       extra: 'extra'
-    })
+    }),
+    LazyTag('div')
   ],
   props: {
     header: String,

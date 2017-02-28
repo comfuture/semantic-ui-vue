@@ -10,11 +10,11 @@ export function SlotClass(mapping) {
       for (let key of Object.keys(mapping)) {
         value = mapping[key]
         if (this.$slots.hasOwnProperty(key)) {
-            for (let slot of this.$slots[key]) {
-              try {
-                addClass(slot.elm, value)
-              } catch (e) {}
-            }
+          for (let slot of this.$slots[key]) {
+            try {
+              addClass(slot.elm, value)
+            } catch (e) {}
+          }
         }
       }
     }
@@ -39,6 +39,45 @@ export function PropClass(...props) {
           ret[prop] = properties.hasOwnProperty(prop) && !!this[prop]
         }
         return ret
+      }
+    }
+  }
+}
+
+/**
+* It define a asyncronous component named 'lazy-tag' that
+* renders a html tag by conditions below:
+*  - lazyTagName instance variable (including computed one)
+*  - defined tag name as props "tag"
+*  - originally coded tag name if component provided as
+*    form '<... is="custom-component">'
+*  - passed parameter to this function
+*/
+export function LazyTag(defaultTagName) {
+  return {
+    props: {
+      tag: String
+    },
+    beforeCreate() {
+      let component = this
+      this.$options.components['lazy-tag'] = {
+        name: 'lazy-tag',
+        functional: true,
+        render(h, context) {
+          var tagName = defaultTagName
+          try {
+            if (typeof component.lazyTagName === 'string') {
+              tagName = component.lazyTagName
+            } else if (component.$vnode.data.hasOwnProperty('tag')) {
+              tagName = component.$vnode.data.tag
+            } else if (component.$options.propsData.hasOwnProperty('tag')) {
+              tagName = component.$options.propsData.tag
+            }
+          } catch (e) {
+            throw new Error("Can't render lazy-tag")
+          }
+          return h(tagName, context.data, context.children)
+        }
       }
     }
   }

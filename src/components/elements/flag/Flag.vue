@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'ui-flag'
+  name: 'ui-flag',
   props: {
     name: String
   }
