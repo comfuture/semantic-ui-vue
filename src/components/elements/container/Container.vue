@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import {PropClass, LazyTag} from 'semantic/mixins'
 
 export default {
