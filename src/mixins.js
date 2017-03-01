@@ -55,12 +55,11 @@ export function PropClass(...props) {
 */
 export function LazyTag(defaultTagName) {
   let makeTagNameGetter = (ctx) => {
-    return () => {
+    return function() {
       var tagName = defaultTagName
       try {
         if (typeof ctx._tag === 'string') {
           tagName = ctx._tag
-          console.log('tag override', ctx._tag)
         } else if (ctx.$vnode.data.hasOwnProperty('tag')) {
           tagName = ctx.$vnode.data.tag
         } else if (ctx.$options.propsData.hasOwnProperty('tag')) {
@@ -84,14 +83,15 @@ export function LazyTag(defaultTagName) {
         name: 'lazy-tag',
         functional: true,
         render(h, context) {
-          console.log('lazy-tag::render', getTagName())
           return h(getTagName(), context.data, context.children)
         }
       }
     },
     computed: {
       lazyTagName: {
-        get: makeTagNameGetter(this),
+        get() {
+          return makeTagNameGetter(this)()
+        },
         set(value) {
           this._tag = value
           this.$forceUpdate()
