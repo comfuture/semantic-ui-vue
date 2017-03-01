@@ -11,9 +11,9 @@ module.exports = {
     docs: './docs/src/index.js'
   },
   output: {
-    path: config.build.assetsRoot,
+    path: config.docs.rootPath,
     filename: utils.assetsPath('js/[name].[chunkhash:7].js'),
-    publicPath: config.build.assetsPublicPath,
+    publicPath: config.docs.publicPath,
     chunkFilename: utils.assetsPath('js/chunk.[chunkhash:7].js')
   },
   module: {

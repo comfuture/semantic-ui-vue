@@ -44,10 +44,10 @@ module.exports = merge(baseConfig, {
     //     to: './dist/docs/assets'
     //   }
     // ]),
-    new ExtractTextPlugin(utils.assetsPath('css/[name].[chunkhash:8].css')),
+    new ExtractTextPlugin(utils.assetsPath('css/[name].[chunkhash:7].css')),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './docs/index.html',
+      template: utils.templateIndex(),
       inject: true,
       minify: {
         caseSensitive: true,

@@ -1,13 +1,16 @@
 var path = require('path')
 
 module.exports = {
-  build: {
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist/docs'),
-    assetsSubDirectory: 'assets',
-    assetsPublicPath: '/'
+  docs: {
+    rootPath: path.resolve(__dirname, '../dist/docs'),
+    assetsPath: 'assets',
+    publicPath: '/',
+    templateIndex: path.resolve(__dirname, '../docs/index.html')
+  },
+  lib: {
+    rootPath: path.resolve(__dirname, '../dist')
   },
   dev: {
-    cssSourceMap: false
+
   }
 }
