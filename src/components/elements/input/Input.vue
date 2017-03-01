@@ -24,9 +24,12 @@ export default {
   name: 'ui-input',
   mixins: [
     LazyTag('div'),
-    PropClass('focus', 'loading', 'disabled', 'error', 'left', 'right', 'corner'.
+    PropClass('focus', 'loading', 'disabled', 'error', 'left', 'right', 'corner',
               'transparent', 'inverted', 'fluid'),
-    SlotClass({icon, label})
+    SlotClass({
+      icon: 'icon',
+      label: 'label'
+    })
   ],
   props: {
     name: String,
@@ -42,13 +45,13 @@ export default {
   },
   computed: {
     hasIcon() {
-      return (!!this.icon
-             || (this.$slots.icon && this.$slot.icon.length > 0))
+      return (!!this.icon ||
+             (this.$slots.icon && this.$slots.icon.length > 0))
     },
     hasLabel() {
-      return (!!this.label
-             || (this.$slot.label || this.$slots.rightLabel))
-    }
+      return (!!this.label ||
+             (this.$slot.label || this.$slots.rightLabel))
+    },
     stylingClass() {
       let cx = []
       if (this.hasIcon) {
