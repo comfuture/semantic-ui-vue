@@ -47,15 +47,11 @@ export default {
         cx.push(`${this.floated} floated`)
       }
       if (this.attached) {
-        // XXX: tag name must not be 'button'
+        // XXX: tag name must not be 'button', this effects before dom rendered
+        this.lazyTagName = 'a'
         cx.push(`${this.attached} attached`)
       }
       return cx
-    },
-    lazyTagName() {
-      if (this.attached && typeof this.attached === 'string') {
-        return 'a'
-      }
     }
   }
 }

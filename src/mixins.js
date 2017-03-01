@@ -47,36 +47,54 @@ export function PropClass(...props) {
 /**
 * It define a asyncronous component named 'lazy-tag' that
 * renders a html tag by conditions below:
-*  - lazyTagName instance variable (including computed one)
+*  - lazyTagName computed variable
 *  - defined tag name as props "tag"
 *  - originally coded tag name if component provided as
 *    form '<... is="custom-component">'
 *  - passed parameter to this function
 */
 export function LazyTag(defaultTagName) {
+  let makeTagNameGetter = (ctx) => {
+    return () => {
+      var tagName = defaultTagName
+      try {
+        if (typeof ctx._tag === 'string') {
+          tagName = ctx._tag
+          console.log('tag override', ctx._tag)
+        } else if (ctx.$vnode.data.hasOwnProperty('tag')) {
+          tagName = ctx.$vnode.data.tag
+        } else if (ctx.$options.propsData.hasOwnProperty('tag')) {
+          tagName = ctx.$options.propsData.tag
+        }
+      } catch (e) {
+        // pass
+      }
+      return tagName
+    }
+  }
+
   return {
     props: {
       tag: String
     },
     beforeCreate() {
-      let component = this
+      let getTagName = makeTagNameGetter(this)
+      this.$options._tag = null
       this.$options.components['lazy-tag'] = {
         name: 'lazy-tag',
         functional: true,
         render(h, context) {
-          var tagName = defaultTagName
-          try {
-            if (typeof component.lazyTagName === 'string') {
-              tagName = component.lazyTagName
-            } else if (component.$vnode.data.hasOwnProperty('tag')) {
-              tagName = component.$vnode.data.tag
-            } else if (component.$options.propsData.hasOwnProperty('tag')) {
-              tagName = component.$options.propsData.tag
-            }
-          } catch (e) {
-            throw new Error("Can't render lazy-tag")
-          }
-          return h(tagName, context.data, context.children)
+          console.log('lazy-tag::render', getTagName())
+          return h(getTagName(), context.data, context.children)
+        }
+      }
+    },
+    computed: {
+      lazyTagName: {
+        get: makeTagNameGetter(this),
+        set(value) {
+          this._tag = value
+          this.$forceUpdate()
         }
       }
     }
