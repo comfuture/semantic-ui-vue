@@ -6,6 +6,7 @@ import Header from './header'
 import Icon from './icon'
 import Image from './image'
 import Input from './input'
+import Label from './label'
 
 export default {
   install(Vue) {
@@ -17,5 +18,6 @@ export default {
     Vue.use(Icon)
     Vue.use(Image)
     Vue.use(Input)
+    Vue.use(Label)
   }
 }
