@@ -17,7 +17,7 @@ export default {
     href: String,
     color: String
   },
-  props: {
+  computed: {
     stylingClass() {
       let cx = []
       if (this.size) {
