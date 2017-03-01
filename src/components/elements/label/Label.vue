@@ -1,5 +1,5 @@
 <template lang="html">
-  <lazy-tag class="ui label" :class="[stylingClass]" :href="href">
+  <lazy-tag class="ui label" :class="[propClass, stylingClass]" :href="href">
     <img :src="image" v-if="image">
     <i class="icon" :class="icon" v-if="icon"></i>
     <slot></slot>
@@ -15,8 +15,8 @@ export default {
   name: 'ui-label',
   mixins: [
     LazyTag('div'),
-    PropClass('basic', 'left', 'right', 'corner' ,'tag', 'ribbon', 'horizontal',
-              'floating', 'circular', 'empty', )
+    PropClass('basic', 'left', 'right', 'corner', 'tag', 'ribbon', 'horizontal',
+              'floating', 'circular', 'empty')
   ],
   props: {
     image: String,
