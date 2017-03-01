@@ -5,6 +5,7 @@ import Flag from './flag'
 import Header from './header'
 import Icon from './icon'
 import Image from './image'
+import Input from './input'
 
 export default {
   install(Vue) {
@@ -15,5 +16,6 @@ export default {
     Vue.use(Header)
     Vue.use(Icon)
     Vue.use(Image)
+    Vue.use(Input)
   }
 }
