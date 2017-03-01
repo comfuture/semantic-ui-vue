@@ -31,17 +31,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
+        loader: 'file',
+        options: {
           name: utils.assetsPath('img/[name].[ext]?[hash:7]')
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
+        loader: 'file',
+        options: {
           name: utils.assetsPath('fonts/[name].[ext]?[hash:7]')
         }
       }
