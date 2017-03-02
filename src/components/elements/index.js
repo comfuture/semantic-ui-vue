@@ -11,6 +11,7 @@ import List from './list'
 import Loader from './loader'
 import Rail from './rail'
 import Reveal from './reveal'
+import Segment from './segment'
 
 export default {
   install(Vue) {
@@ -27,5 +28,6 @@ export default {
     Vue.use(Loader)
     Vue.use(Rail)
     Vue.use(Reveal)
+    Vue.use(Segment)
   }
 }
