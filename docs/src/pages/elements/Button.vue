@@ -70,7 +70,13 @@
         <ui-button>Button 2</ui-button>
         <ui-button>Button 3</ui-button>
       </ui-buttons>
+
+      <ui-button>ui-button</ui-button>
+      <a is="ui-button">a button</a>
+      <button is="ui-button">is button</button>
+      <ui-button>ui-button</ui-button>
     </div>
+
   </docs-page>
 </template>
 
@@ -78,8 +84,8 @@
 export default {
   name: 'docs-elements-button',
   methods: {
-    buttonClick(event) {
-      console.log('button clicked', event)
+    buttonClick(event, component) {
+      console.log('button clicked', event, component)
     }
   }
 }

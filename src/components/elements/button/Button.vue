@@ -1,18 +1,19 @@
 <template lang="html">
-  <button class="ui button" :class="[autoClass, stylingClass, propClass]" @click="$emit('click', $event)">
+  <lazy-tag class="ui button" :class="[autoClass, stylingClass, propClass]" @click="$emit('click', $event)">
     <i class="icon" :class="iconName" v-if="hasIcon"></i>
     <slot></slot>
-  </button>
+  </lazy-tag>
 </template>
 
 <script>
-import {PropClass} from 'semantic/mixins'
+import {PropClass, LazyTag} from 'semantic/mixins'
 
 export default {
   name: 'ui-button',
   mixins: [
     PropClass('primary', 'secondary', 'animated', 'labeled', 'basic', 'inverted',
-              'active', 'disabled', 'loading', 'compact', 'fluid', 'circular')
+              'active', 'disabled', 'loading', 'compact', 'fluid', 'circular'),
+    LazyTag('button')
   ],
   props: {
     icon: String,
@@ -46,7 +47,8 @@ export default {
         cx.push(`${this.floated} floated`)
       }
       if (this.attached) {
-        // XXX: tag name must not be 'button'
+        // XXX: tag name must not be 'button', this effects before dom rendered
+        this.lazyTagName = 'a'
         cx.push(`${this.attached} attached`)
       }
       return cx
