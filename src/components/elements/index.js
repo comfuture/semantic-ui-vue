@@ -10,6 +10,7 @@ import Label from './label'
 import List from './list'
 import Loader from './loader'
 import Rail from './rail'
+import Reveal from './reveal'
 
 export default {
   install(Vue) {
@@ -25,5 +26,6 @@ export default {
     Vue.use(List)
     Vue.use(Loader)
     Vue.use(Rail)
+    Vue.use(Reveal)
   }
 }
