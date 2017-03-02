@@ -9,6 +9,7 @@ import Input from './input'
 import Label from './label'
 import List from './list'
 import Loader from './loader'
+import Rail from './rail'
 
 export default {
   install(Vue) {
@@ -23,5 +24,6 @@ export default {
     Vue.use(Label)
     Vue.use(List)
     Vue.use(Loader)
+    Vue.use(Rail)
   }
 }
