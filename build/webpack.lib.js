@@ -1,14 +1,25 @@
-var path = require('path')
+// var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseConfig = require('./webpack.base')
+var config = require('./config')
+
 module.exports = merge(baseConfig, {
   entry: {
     lib: './src/index.js'
   },
   output: {
-    path: './dist/',
-    filename: '[name].js'
+    path: config.lib.rootPath,
+    filename: '[name].js',
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue'
+      }
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -28,3 +39,6 @@ module.exports = merge(baseConfig, {
   ],
   devtool: '#source-map'
 })
+
+// delete entry docs
+delete module.exports.entry.docs

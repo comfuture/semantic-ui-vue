@@ -1,51 +1,30 @@
-var path = require('path')
-var webpack = require('webpack')
+// var path = require('path')
+// var webpack = require('webpack')
 var merge = require('webpack-merge')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var baseConfig = require('./webpack.base')
+var utils = require('./utils')
 
 module.exports = merge(baseConfig, {
-  entry: {
-    dev: './docs/src/index.js'
-  },
   output: {
-    path: '/tmp',
-    filename: '[name].js'
+    filename: utils.assetsPath('js/[name].[hash:7].js')
   },
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
+        test: /\.css$/,
+        use: ['vue-style', 'css']
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      },
-      {
-        test: /\.(woff2?|ttf|eot|svg|otf)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        test: /\.vue$/,
+        loader: 'vue'
       }
     ]
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.common.js',
-      'elements': path.resolve(__dirname, '../src/components/elements')
-    }
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './docs/index.html',
+      template: utils.templateIndex(),
       inject: true
     })
   ],

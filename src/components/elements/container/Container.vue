@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 import {PropClass, LazyTag} from 'semantic/mixins'
 
 export default {
@@ -24,6 +23,7 @@ export default {
           cx.push(this.align)
         }
       }
+      return cx
     }
   }
 }
