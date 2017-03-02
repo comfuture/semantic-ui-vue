@@ -7,6 +7,7 @@ import Icon from './icon'
 import Image from './image'
 import Input from './input'
 import Label from './label'
+import List from './list'
 
 export default {
   install(Vue) {
@@ -19,5 +20,6 @@ export default {
     Vue.use(Image)
     Vue.use(Input)
     Vue.use(Label)
+    Vue.use(List)
   }
 }
