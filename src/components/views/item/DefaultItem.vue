@@ -1,21 +1,34 @@
 <template lang="html">
-  <div class="item" @click="$emit('click', $event)" :class="className">
+  <lazy-tag class="item" @click="$emit('click', $event)"
+    :class="[propClass, stylingClass]">
+    <i class="icon" :class="icon" v-if="icon"></i>
     <div class="ui image" v-if="imageProps">
       <img :src="image">
     </div>
     <slot name="image"></slot>
+    <slot name="header"></slot>
+    <slot name="description"></slot>
     <slot></slot>
-  </div>
+  </lazy-tag>
 </template>
 
 <script>
-import {SlotClass} from 'semantic/mixins'
+import {LazyTag, PropClass, SlotClass} from 'semantic/mixins'
 
 export default {
-  mixins: [SlotClass({image: 'ui image'})],
+  mixins: [
+    LazyTag('div'),
+    PropClass('active'),
+    SlotClass({
+      image: 'ui image',
+      header: 'header',
+      description: 'description'
+    })
+  ],
   props: {
     image: String,
-    active: Boolean
+    icon: String,
+    value: [String, Object]
   },
   computed: {
     imageProps() {
@@ -23,10 +36,9 @@ export default {
              !(this.$slots.hasOwnProperty('image') &&
              this.$slots.image.length > 0)
     },
-    className() {
-      return {
-        active: this.active
-      }
+    stylingClass() {
+      let cx = []
+      return cx
     }
   }
 }

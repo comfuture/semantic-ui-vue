@@ -33,13 +33,13 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './docs/index.html',
+      template: utils.templateIndex(),
       inject: true,
       chunks: ['docs']
     }),
     new HtmlWebpackPlugin({
       filename: 'test.html',
-      template: './docs/index.html',
+      template: utils.templateIndex(),
       inject: true,
       chunks: ['test']
     })

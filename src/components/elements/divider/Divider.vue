@@ -1,20 +1,18 @@
 <template lang="html">
-  <div class="ui divider" :class="[propClass]">
+  <lazy-tag class="ui divider" :class="[propClass]">
     <slot></slot>
-  </div>
+  </lazy-tag>
 </template>
 
 <script>
-import {PropClass} from 'semantic/mixins'
+import {PropClass, LazyTag} from 'semantic/mixins'
 
 export default {
   name: 'ui-divider',
   mixins: [
     PropClass('horizontal', 'vertical', 'inverted', 'fitted', 'hidden',
-              'section', 'clearing')
+              'section', 'clearing'),
+    LazyTag('div')
   ]
 }
 </script>
-
-<style lang="css">
-</style>

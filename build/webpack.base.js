@@ -11,9 +11,10 @@ module.exports = {
     docs: './docs/src/index.js'
   },
   output: {
-    path: config.build.assetsRoot,
+    path: config.docs.rootPath,
     filename: utils.assetsPath('js/[name].[chunkhash:7].js'),
-    publicPath: config.build.assetsPublicPath
+    publicPath: config.docs.publicPath,
+    chunkFilename: utils.assetsPath('js/chunk.[chunkhash:7].js')
   },
   module: {
     rules: [
@@ -31,17 +32,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
+        loader: 'file',
+        options: {
           name: utils.assetsPath('img/[name].[ext]?[hash:7]')
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
+        loader: 'file',
+        options: {
           name: utils.assetsPath('fonts/[name].[ext]?[hash:7]')
         }
       }
