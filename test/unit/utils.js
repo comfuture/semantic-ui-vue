@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import $ from 'jquery'
 
 /**
  * Creator Vue component
@@ -24,10 +23,28 @@ export function newVM(vue) {
 }
 
 /**
- * jQuery Function
+ * Helper Function
  *
- * return array of classes
+ * return a wrapper that have useful functions
+ * @param {HTMLElement, NodeList, CSSSelector} el
  */
-$.fn.classes = function() {
-  return this.attr('class').split(' ')
+function $(el) {
+  if (typeof el === 'string') { // selector
+    el = document.querySelectorAll(el)
+  }
+  // XXX firstElement
+  var firstElement
+  if (el.length > 0) {
+    firstElement = el[0]
+  } else {
+    firstElement = el
+  }
+  return {
+    classes() {
+      return firstElement.className.split(' ')
+    },
+    children(selector) {
+      return $(firstElement.querySelectorAll(selector))
+    }
+  }
 }
