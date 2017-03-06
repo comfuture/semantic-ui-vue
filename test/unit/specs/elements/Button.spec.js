@@ -7,7 +7,7 @@ describe('Button.vue', () => {
     const vm = newVM()
 
     const cx = ['ui', 'button']
-    vm.$.classes().should.containDeep(cx)
+    vm.$.classes().should.contains(cx)
   })
 
   it('should have red', () => {
@@ -16,7 +16,7 @@ describe('Button.vue', () => {
     })
 
     const cx = ['ui', 'red', 'button']
-    vm.$.classes().should.containDeep(cx).which.length(cx.length)
+    vm.$.classes().should.containsAll(cx)
   })
 
   it('should have icon', () => {
@@ -25,10 +25,10 @@ describe('Button.vue', () => {
     })
 
     const cx = ['ui', 'icon', 'button']
-    vm.$.classes().should.containDeep(cx).which.length(cx.length)
+    vm.$.classes().should.contains(cx)
 
     const $i = vm.$.children('i')
     const iconCx = ['icon', 'sign', 'in']
-    $i.classes().should.containDeep(iconCx).which.length(iconCx.length)
+    $i.classes().should.containsAll(iconCx)
   })
 })
