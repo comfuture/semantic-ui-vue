@@ -2,6 +2,8 @@ var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var StringReplacePlugin = require("string-replace-webpack-plugin")
+var makeSourceBlock = require('./util').makeSourceBlock
 var baseConfig = require('./webpack.base')
 
 module.exports = merge(baseConfig, {
@@ -33,6 +35,17 @@ module.exports = merge(baseConfig, {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.vue$/,
+        loader: StringReplacePlugin.replace({
+          replacements: [
+            {
+              pattern: /<docs-example(?:[^>]*)>((?:.|\n)*?)<\/docs-example>/igm,
+              replacement: makeSourceBlock
+            }
+          ]
+        })
       }
     ]
   },
@@ -47,7 +60,8 @@ module.exports = merge(baseConfig, {
       filename: 'index.html',
       template: './docs/index.html',
       inject: true
-    })
+    }),
+    new StringReplacePlugin()
   ],
   devServer: {
     historyApiFallback: true,
