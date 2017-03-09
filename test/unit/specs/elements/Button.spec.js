@@ -1,6 +1,5 @@
 import * as utils from 'test/unit/utils.js'
 import Button from 'elements/button/Button.vue'
-import Container from 'elements/container/Container.vue'
 
 describe('Button.vue', () => {
   const newVM = utils.newVM(Button)
@@ -44,8 +43,7 @@ describe('Button.vue', () => {
   it('component test', (done) => {
     const vm = newVM({
       color: ''
-    }, `<ui-container><ui-button :color="color">btn</ui-button></ui-container>`,
-    [Container])
+    }, `<ui-container><ui-button :color="color">btn</ui-button></ui-container>`)
 
     const uiButton = vm.$.children('button')
 

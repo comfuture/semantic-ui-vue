@@ -1,5 +1,9 @@
 import Vue from 'vue'
 
+// install components
+import semantic from 'semantic'
+Vue.use(semantic)
+
 /**
  * Creator Vue component
  *
@@ -10,26 +14,19 @@ import Vue from 'vue'
  *
  * @param {Object} vue - Vue component
  * @returns {Function} - 컴포넌트 생성자(Ctor)와 DOM Element(el)를 가지는 클로저
- *                     - 파라메터로 propsData, template, components를 받는다.
+ *                     - 파라메터로 propsData, template를 받는다.
  */
 export function newVM(vue) {
   const Ctor = Vue.extend(vue)
   const el = document.createElement('div')
-  const _components = {
-    [vue.name]: vue
-  }
 
-  return (propsData = {}, template = '', components = []) => {
+  return (propsData = {}, template = '') => {
     let config = {
       el, template
     }
 
     if (template) {
       config.data = () => propsData
-      config.components = components.reduce((component, vue) => {
-        component[vue.name] = vue
-        return component
-      }, _components)
     } else {
       config.propsData = propsData
     }
