@@ -15,20 +15,44 @@ describe('Button.vue', () => {
       color: 'red'
     })
 
-    const cx = ['ui', 'red', 'button']
-    vm.$.classes().should.containsAll(cx)
+    const cx = ['red']
+    vm.stylingClass.should.containsAll(cx)
   })
 
-  it('should have icon', () => {
+  it('should have icon', (done) => {
     const vm = newVM({
-      icon: 'sign in'
+      // icon: 'sign in'
     })
 
-    const cx = ['ui', 'icon', 'button']
-    vm.$.classes().should.contains(cx)
+    const cx = ['icon']
+    vm.$.classes().should.not.contains(cx)
 
-    const $i = vm.$.children('i')
-    const iconCx = ['icon', 'sign', 'in']
-    $i.classes().should.containsAll(iconCx)
+    vm.icon = 'sign in'
+
+    vm.$nextTick(() => {
+      vm.$.classes().should.contains(cx)
+
+      const $i = vm.$.children('i')
+      const iconCx = ['icon', 'sign', 'in']
+      $i.classes().should.containsAll(iconCx)
+
+      done()
+    })
+  })
+
+  it('component test', (done) => {
+    const vm = newVM({
+      color: ''
+    }, `<ui-container><ui-button :color="color">btn</ui-button></ui-container>`)
+
+    const uiButton = vm.$.children('button')
+
+    uiButton.classes().should.not.contains(['red'])
+    vm.color = 'red'
+
+    vm.$nextTick(() => {
+      uiButton.classes().should.contains(['red'])
+      done()
+    })
   })
 })
