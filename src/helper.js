@@ -8,11 +8,23 @@ function unique(arr) {
 export function addClass(el, classes) {
   let classArray = classes.split(' ')
   if (el.classList) {
-    el.classList.add(classArray)
+    el.classList.add(...classArray)
   } else {
     let classList = el.className.split(' ')
     classList.splice(classList.length, 0, ...classArray)
     el.className = unique(classList).join(' ')
+  }
+}
+
+export function removeClass(el, classes) {
+  let classArray = classes.split(' ')
+  if (el.classList) {
+    el.classList.remove(...classArray)
+  } else {
+    let classList = el.className.split(' ')
+    classList.forEach((name) => {
+      el.className = el.className.replace(new RegExp(`(^| )${name}( |$)`), '')
+    })
   }
 }
 
