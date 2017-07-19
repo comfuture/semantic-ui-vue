@@ -12,6 +12,7 @@
 </template>
 <script>
 import {PropClass} from 'semantic/mixins'
+import {addClass, removeClass} from 'semantic/helper'
 
 export default {
   name: 'ui-dimmer',
@@ -20,7 +21,15 @@ export default {
   ],
   props: {
     loading: [Boolean, String],
-    active: Boolean
+    active: Boolean,
+    blurring: Boolean
+  },
+  watch: {
+    active(value) {
+      if (this.blurring && !this.page) {
+        (value ? addClass : removeClass)(this.$el.parentNode, 'blurring dimmable dimmed')
+      }
+    }
   },
   computed: {
     loadingText() {
