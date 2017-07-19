@@ -11,7 +11,7 @@
     "build:docs": "node build/build-docs.js"
   },
   "dependencies": {
-    "vue": "^2.1.0"
+    "vue": "^2.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -34,13 +34,13 @@
     "mocha": "^3.2.0",
     "mocha-loader": "^1.1.1",
     "remove": "^0.1.5",
-    "semantic-ui-css": "^2.2.4",
+    "semantic-ui-css": "^2.2.11",
     "should": "^11.2.0",
     "should-sinon": "0.0.5",
     "sinon": "^1.17.7",
     "vue-loader": "^10.0.0",
     "vue-router": "^2.2.0",
-    "vue-template-compiler": "^2.1.0",
+    "vue-template-compiler": "^2.4.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.2.0",
     "webpack-merge": "^2.6.1"
