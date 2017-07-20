@@ -3,7 +3,7 @@
     <div class="bar" :style="{width: `${percent}%`}">
       <div class="progress" v-if="showProgress">{{percent}}%</div>
     </div>
-    <div class="label" v-if="label">{{label}}</div>
+    <div class="label" v-if="label">{{interpolatedLabel}}</div>
   </div>
 </template>
 <script>
@@ -26,15 +26,15 @@ export default {
     },
     size: {
       type: String,
-      validate: value => SIZES.indexOf(value) > -1
+      validator: value => SIZES.indexOf(value) > -1
     },
     color: {
       type: String,
-      validate: value => COLORS.indexOf(value) > -1
+      validator: value => COLORS.indexOf(value) > -1
     },
     attach: {
       type: String,
-      validate: value => ATTACH.indexOf(value) > -1
+      validator: value => ATTACH.indexOf(value) > -1
     },
     label: String,
     showProgress: Boolean
@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     percent() {
-      return Math.floor(this.value / this.max * 100)
+      return Math.floor(Math.min(this.value, this.max) / this.max * 100)
     },
     stylingClass() {
       let cx = []
@@ -53,6 +53,12 @@ export default {
       this.size && cx.push(this.size)
       this.attach && cx.push(`${this.attach} attached`)
       return cx
+    },
+    interpolatedLabel() {
+      if (this.label) {
+        return this.label.replace(/{value}/, this.value).replace(/{max}/, this.max)
+      }
+      return ''
     }
   }
 }
