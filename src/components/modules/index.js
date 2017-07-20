@@ -3,6 +3,7 @@ import Modal from './modal'
 import Checkbox from './checkbox'
 import Accordion from './accordion'
 import Progress from './progress'
+import Rating from './rating'
 
 export default {
   install(Vue) {
@@ -11,5 +12,6 @@ export default {
     Vue.use(Checkbox)
     Vue.use(Accordion)
     Vue.use(Progress)
+    Vue.use(Rating)
   }
 }
