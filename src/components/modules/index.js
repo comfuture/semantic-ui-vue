@@ -4,6 +4,7 @@ import Checkbox from './checkbox'
 import Accordion from './accordion'
 import Progress from './progress'
 import Rating from './rating'
+import Tab from './tab'
 
 export default {
   install(Vue) {
@@ -13,5 +14,6 @@ export default {
     Vue.use(Accordion)
     Vue.use(Progress)
     Vue.use(Rating)
+    Vue.use(Tab)
   }
 }
