@@ -2,7 +2,7 @@
   <div class="ui rating" :class="[propClass, stylingClass]" @mouseout="leave">
     <i class="ui icon" :class="{active: i <= value}"
       @mouseover="hover(i)"
-      @click="setValue(i)"
+      @click="toggleValue(i)"
       v-for="(i, item) in items" :key="i"></i>
   </div>
 </template>
@@ -22,6 +22,12 @@ export default {
     size: String,
     readonly: Boolean
   },
+  data: function () {
+    return {
+      toggle: true,
+      oldvalue: 0
+    }
+  },
   computed: {
     items() {
       return [...Array(this.max).keys()]
@@ -37,6 +43,34 @@ export default {
       if (this.readonly) return
       this.leave()
       this.$emit('input', value)
+    },
+    toggleValue(value) {
+      if (this.readonly) return
+      this.leave()
+      let siblings = [].slice.call(this.$el.children)
+      if (this.toggle) {
+        siblings.forEach((el, i) => {
+          if (i <= value) {
+            addClass(el, 'active')
+          }
+        })
+        this.toggle = false
+        this.oldvalue = value
+      } else {
+        siblings.forEach((el, i) => {
+          removeClass(el, 'active')
+        })
+        this.toggle = true
+        if (value > this.oldvalue || value < this.oldvalue) {
+          siblings.forEach((el, i) => {
+            if (i <= value) {
+              addClass(el, 'active')
+            }
+          })
+          this.toggle = false
+        }
+        this.oldvalue = value
+      }
     },
     hover(value) {
       if (this.readonly) return
