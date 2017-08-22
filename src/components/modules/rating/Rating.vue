@@ -1,8 +1,8 @@
 <template>
   <div class="ui rating" :class="[propClass, stylingClass]" @mouseout="leave">
-    <i class="ui icon" :class="{active: i <= value}"
+    <i class="ui icon" :class="{active: i <= value - 1}"
       @mouseover="hover(i)"
-      @click="toggleValue(i)"
+      @click="setValue(i)"
       v-for="(i, item) in items" :key="i"></i>
   </div>
 </template>
@@ -24,8 +24,7 @@ export default {
   },
   data: function () {
     return {
-      toggle: true,
-      oldvalue: 0
+      toggle: 0
     }
   },
   computed: {
@@ -39,50 +38,35 @@ export default {
     }
   },
   mounted: function () {
-    this.setValue()
+    this.toggle = this.value ? 0 : 1
   },
   methods: {
     setValue(value) {
       if (this.readonly) return
       this.leave()
-      if (this.$attrs) {
-        let rating = this.$attrs['rating'] - 1
-        if (rating >= 0) {
-          let siblings = [].slice.call(this.$el.children)
-          siblings.forEach((el, i) => {
-            if (i <= rating) {
-              addClass(el, 'active')
-            }
-          })
-        }
-      }
-    },
-    toggleValue(value) {
-      if (this.readonly) return
-      this.leave()
+      if (this.max === 1) return this.toggleValue()
       let siblings = [].slice.call(this.$el.children)
       siblings.forEach((el, i) => {
         removeClass(el, 'active')
       })
+      siblings.forEach((el, i) => {
+        if (i <= value) {
+          addClass(el, 'active')
+        }
+      })
+    },
+    toggleValue() {
+      let siblings = [].slice.call(this.$el.children)
       if (this.toggle) {
         siblings.forEach((el, i) => {
-          if (i <= value) {
-            addClass(el, 'active')
-          }
+          addClass(el, 'active')
         })
-        this.toggle = false
-        this.oldvalue = value
+        this.toggle = 0
       } else {
-        this.toggle = true
-        if (value > this.oldvalue || value < this.oldvalue) {
-          siblings.forEach((el, i) => {
-            if (i <= value) {
-              addClass(el, 'active')
-            }
-          })
-          this.toggle = false
-        }
-        this.oldvalue = value
+        siblings.forEach((el, i) => {
+          removeClass(el, 'active')
+        })
+        this.toggle = 1
       }
     },
     hover(value) {
