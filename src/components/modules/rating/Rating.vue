@@ -38,16 +38,32 @@ export default {
       return cx
     }
   },
+  mounted: function () {
+    this.setValue()
+  },
   methods: {
     setValue(value) {
       if (this.readonly) return
       this.leave()
-      this.$emit('input', value)
+      if (this.$attrs) {
+        let rating = this.$attrs['rating'] - 1
+        if (rating >= 0) {
+          let siblings = [].slice.call(this.$el.children)
+          siblings.forEach((el, i) => {
+            if (i <= rating) {
+              addClass(el, 'active')
+            }
+          })
+        }
+      }
     },
     toggleValue(value) {
       if (this.readonly) return
       this.leave()
       let siblings = [].slice.call(this.$el.children)
+      siblings.forEach((el, i) => {
+        removeClass(el, 'active')
+      })
       if (this.toggle) {
         siblings.forEach((el, i) => {
           if (i <= value) {
@@ -57,9 +73,6 @@ export default {
         this.toggle = false
         this.oldvalue = value
       } else {
-        siblings.forEach((el, i) => {
-          removeClass(el, 'active')
-        })
         this.toggle = true
         if (value > this.oldvalue || value < this.oldvalue) {
           siblings.forEach((el, i) => {
