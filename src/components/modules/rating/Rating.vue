@@ -44,7 +44,11 @@ export default {
     setValue(value) {
       if (this.readonly) return
       this.leave()
-      this.rating = value
+      if (this.max === 1) {
+        this.rating = this.rating > 0 ? 0 : value
+      } else {
+        this.rating = value
+      }
       this.$emit('input', value)
     },
     hover(value) {
